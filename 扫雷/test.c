@@ -20,11 +20,10 @@ void game()
 	InitBoard(mine, ROWS, COLS, '0');
 	InitBoard(show, ROWS, COLS, '*');
 	//打印棋盘
-	//DisplayBoard(mine, ROW, COL);
 	DisplayBoard(show, ROW, COL);
 	//布置雷
 	SetMine(mine, ROW, COL);
-	//DisplayBoard(mine, ROW, COL);
+	//DisplayBoard(mine, ROW, COL);//查看雷的位置
 	//扫雷
 	FindMine(mine, show, ROW, COL);
 }
