@@ -2,7 +2,7 @@
 
 #include "game.h"
 
-void InitBoard(char board[ROWS][COLS], int rows, int cols, char set)//³õÊ¼»¯ÆåÅÌ
+void InitBoard(char board[ROWS][COLS], int rows, int cols, char set)//åˆå§‹åŒ–æ£‹ç›˜
 {
 	int i = 0;
 	int j = 0;
@@ -15,13 +15,12 @@ void InitBoard(char board[ROWS][COLS], int rows, int cols, char set)//³õÊ¼»¯ÆåÅÌ
 	}
 }
 
-void DisplayBoard(char board[ROWS][COLS], int row, int col)//´òÓ¡ÆåÅÌ
+void DisplayBoard(char board[ROWS][COLS], int row, int col)//æ‰“å°æ£‹ç›˜
 {
 	int i = 0;
 	int j = 0;
-	printf("-----É¨À×ÓÎÏ·------\n");
-	//´òÓ¡ÁĞºÅ
-	printf("");
+	printf("-----æ‰«é›·æ¸¸æˆ------\n");
+	//æ‰“å°åˆ—å·
 	for (i = 0; i <= row; i++)
 	{
 		printf("%d ", i);
@@ -29,7 +28,7 @@ void DisplayBoard(char board[ROWS][COLS], int row, int col)//´òÓ¡ÆåÅÌ
 	printf("\n");
 	for (i = 1; i <= row; i++)
 	{
-		printf("%d ", i);//´òÓ¡ĞĞºÅ
+		printf("%d ", i);//æ‰“å°è¡Œå·
 		for (j = 1; j <= col; j++)
 		{
 			printf("%c ", board[i][j]);
@@ -39,7 +38,7 @@ void DisplayBoard(char board[ROWS][COLS], int row, int col)//´òÓ¡ÆåÅÌ
 	printf("-------------------\n");
 }
 
-void SetMine(char board[ROWS][COLS], int row, int col)//²¼ÖÃÀ×
+void SetMine(char board[ROWS][COLS], int row, int col)//å¸ƒç½®é›·
 {
 	int count = EASY_COUNT;
 	while (count)
@@ -54,7 +53,7 @@ void SetMine(char board[ROWS][COLS], int row, int col)//²¼ÖÃÀ×
 	}
 }
 
-int get_mine_count(char mine[ROWS][COLS], int x, int y)//ÖÜÎ§À×µÄ¸öÊı
+int get_mine_count(char mine[ROWS][COLS], int x, int y)//å‘¨å›´é›·çš„ä¸ªæ•°
 {
 	return mine[x - 1][y] +
 		mine[x - 1][y - 1] +
@@ -66,7 +65,7 @@ int get_mine_count(char mine[ROWS][COLS], int x, int y)//ÖÜÎ§À×µÄ¸öÊı
 		mine[x - 1][y + 1] - 8 * '0';
 }
 
-void spread(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, int x, int y)//ÏÔÊ¾ÖÜÎ§À×µÄ¸öÊı
+void spread(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, int x, int y)//æ˜¾ç¤ºå‘¨å›´é›·çš„ä¸ªæ•°
 {
 	int count = get_mine_count(mine, x, y);
 	if (x >= 1 && x <= row && y >= 1 && y <= col)
@@ -89,7 +88,7 @@ void spread(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, int 
 		}
 	}
 }
-int  win(char show[ROWS][COLS], int row, int col)//Ê¤ÀûÌõ¼ş
+int  win(char show[ROWS][COLS], int row, int col)//èƒœåˆ©æ¡ä»¶
 {
 	int number = 0;
 	int i = 0;
@@ -114,37 +113,37 @@ int  win(char show[ROWS][COLS], int row, int col)//Ê¤ÀûÌõ¼ş
 	}
 }
 
-void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)//ÅÅ²éÀ×
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)//æ’æŸ¥é›·
 {
 	int x = 0;
 	int y = 0;
 	while (1)
 	{
-		printf("ÇëÊäÈëÅÅ²éÀ×µÄ×ø±ê:>");
+		printf("è¯·è¾“å…¥æ’æŸ¥é›·çš„åæ ‡:>");
 		scanf("%d%d", &x, &y);
 		if (x >= 1 && x <= row && y >= 1 && y <= col)
 		{
 			if (show[x][y] != '*')
 			{
-				printf("¸Ã×ø±ê±»ÅÅ²é¹ıÁË£¬²»ÄÜÖØ¸´ÅÅ²é\n");
+				printf("è¯¥åæ ‡è¢«æ’æŸ¥è¿‡äº†ï¼Œä¸èƒ½é‡å¤æ’æŸ¥\n");
 			}
 			else
 			{
-				//²ÈÀ×
+				//è¸©é›·
 				if (mine[x][y] == '1')
 				{
-					printf("ºÜÒÅº¶£¬Äã±»Õ¨ËÀÁË\n");
+					printf("å¾ˆé—æ†¾ï¼Œä½ è¢«ç‚¸æ­»äº†\n");
 					DisplayBoard(mine, row, col);
 					break;
 				}
-				else//²»ÊÇÀ×
+				else//ä¸æ˜¯é›·
 				{
-					//¼ÆËãx£¬y×ø±êÖÜÎ§ÓĞ¼¸¸öÀ×
+					//è®¡ç®—xï¼Œyåæ ‡å‘¨å›´æœ‰å‡ ä¸ªé›·
 					spread(mine, show, row, col, x, y);
 					DisplayBoard(show, row, col);
-					if (win(show, row, col))//Ê¤ÀûÌõ¼ş
+					if (win(show, row, col))//èƒœåˆ©æ¡ä»¶
 					{
-						printf("¹§Ï²Äã£¬ÅÅÀ×³É¹¦\n");
+						printf("æ­å–œä½ ï¼Œæ’é›·æˆåŠŸ\n");
 						DisplayBoard(mine, row, col);
 						break;
 					}
@@ -153,7 +152,7 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)//Å
 		}
 		else
 		{
-			printf("ÊäÈë×ø±ê·Ç·¨£¬ÇëÖØĞÂÊäÈë£¡\n");
+			printf("è¾“å…¥åæ ‡éæ³•ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
 		}
 	}
 }
