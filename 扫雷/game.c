@@ -21,7 +21,7 @@ void DisplayBoard(char board[ROWS][COLS], int row, int col)//打印棋盘
 	int j = 0;
 	printf("-----扫雷游戏------\n");
 	//打印列号
-	for (i = 0; i <= row; i++)
+	for (i = 0; i <= col; i++)
 	{
 		printf("%d ", i);
 	}
